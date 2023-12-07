@@ -9,11 +9,18 @@ namespace OneBackComboTrainingWeb.Controllers;
 [Route("[controller]")]
 public class MatchController : ControllerBase
 {
+
+    private MatchService _matchService;
+
+    public MatchController(MatchService matchService)
+    {
+        _matchService = matchService;
+    }
+
     [HttpGet(Name = "UpdateMatchResult")]
     public string UpdateMatchResult(RequestUpdatedMatchResult request)
     {
-        var matchService = new MatchService(new MatchRepo());
-        var responseMatch = matchService.UpdateMatchResult(request);
+        var responseMatch = _matchService.UpdateMatchResult(request);
         return responseMatch.Result;
     }
 }
